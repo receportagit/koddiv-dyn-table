@@ -41,10 +41,8 @@
   font-size: 0.8125rem;
   font-weight: 500;
   cursor: pointer;
-  transition:
-    background-color var(--dyn-table-transition),
-    border-color var(--dyn-table-transition),
-    color var(--dyn-table-transition);
+  transition: background-color var(--dyn-table-transition),
+    border-color var(--dyn-table-transition), color var(--dyn-table-transition);
 }
 
 .dyn-table-toolbar__btn:hover:not(:disabled) {
@@ -99,8 +97,7 @@
   font-size: 0.8125rem;
   font-weight: 500;
   cursor: pointer;
-  transition:
-    background-color var(--dyn-table-transition),
+  transition: background-color var(--dyn-table-transition),
     border-color var(--dyn-table-transition);
 }
 
@@ -179,8 +176,7 @@
   color: var(--dyn-table-text-muted);
   cursor: pointer;
   flex-shrink: 0;
-  transition:
-    background-color var(--dyn-table-transition),
+  transition: background-color var(--dyn-table-transition),
     color var(--dyn-table-transition);
 }
 
@@ -365,8 +361,7 @@
   background: transparent;
   color: var(--dyn-table-text-muted);
   cursor: pointer;
-  transition:
-    background-color var(--dyn-table-transition),
+  transition: background-color var(--dyn-table-transition),
     color var(--dyn-table-transition);
 }
 
@@ -391,8 +386,7 @@
   color: var(--dyn-table-text-muted);
   font-size: 0.8125rem;
   cursor: pointer;
-  transition:
-    background-color var(--dyn-table-transition),
+  transition: background-color var(--dyn-table-transition),
     color var(--dyn-table-transition);
 }
 
@@ -455,8 +449,8 @@
   --dyn-table-text: #334155;
   --dyn-table-text-muted: #64748b;
   --dyn-table-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-  --dyn-table-shadow-lg:
-    0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --dyn-table-shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.07),
+    0 2px 4px -2px rgba(0, 0, 0, 0.05);
   --dyn-table-sort-active: #2563eb;
   --dyn-table-sort-inactive: #94a3b8;
 }
@@ -465,9 +459,10 @@
 .dyn-table-wrapper--light .dyn-table-toolbar {
   background: #fafbfc;
   border-bottom: 1px solid #e5e7eb;
-  padding: 12px 20px;
-  min-height: 48px;
-  gap: 10px;
+  font-size: 0.8125rem;
+  min-height: 44px;
+  gap: 12px;
+  padding: 10px 16px;
 }
 
 .dyn-table-wrapper--light .dyn-table-toolbar__btn {
@@ -479,10 +474,8 @@
   border-radius: 8px;
   font-size: 0.8125rem;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-  transition:
-    background-color var(--dyn-table-transition),
-    border-color var(--dyn-table-transition),
-    color var(--dyn-table-transition),
+  transition: background-color var(--dyn-table-transition),
+    border-color var(--dyn-table-transition), color var(--dyn-table-transition),
     box-shadow var(--dyn-table-transition);
 }
 
@@ -517,10 +510,8 @@
   border-radius: 8px;
   font-weight: 500;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-  transition:
-    background-color var(--dyn-table-transition),
-    border-color var(--dyn-table-transition),
-    color var(--dyn-table-transition),
+  transition: background-color var(--dyn-table-transition),
+    border-color var(--dyn-table-transition), color var(--dyn-table-transition),
     box-shadow var(--dyn-table-transition);
 }
 
@@ -543,8 +534,7 @@
 .dyn-table-wrapper--light .dyn-table-toolbar__dropdown-panel {
   border: 1px solid #e5e7eb;
   border-radius: 10px;
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.07),
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07),
     0 10px 20px -5px rgba(0, 0, 0, 0.08);
   background: #ffffff;
 }
@@ -574,8 +564,8 @@
   --dyn-table-text: #e2e8f0;
   --dyn-table-text-muted: #94a3b8;
   --dyn-table-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --dyn-table-shadow-lg:
-    0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+  --dyn-table-shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 2px 4px -2px rgba(0, 0, 0, 0.2);
   --dyn-table-sort-active: #93c5fd;
   --dyn-table-sort-inactive: #64748b;
 }
@@ -610,8 +600,7 @@
   white-space: nowrap;
   letter-spacing: 0.01em;
   position: relative;
-  transition:
-    background-color var(--dyn-table-transition),
+  transition: background-color var(--dyn-table-transition),
     color var(--dyn-table-transition);
 }
 
@@ -640,8 +629,7 @@
   background: var(--dyn-table-header-border);
   border-radius: 1px;
   opacity: 0.5;
-  transition:
-    opacity var(--dyn-table-transition),
+  transition: opacity var(--dyn-table-transition),
     background-color var(--dyn-table-transition);
 }
 
@@ -649,6 +637,17 @@
 .dyn-table-resize-handle:hover::after {
   opacity: 0.9;
   background: var(--dyn-table-sort-active);
+}
+
+.dyn-table-wrapper--dark .dyn-table-resize-handle::after {
+  background: rgba(255, 255, 255, 0.35);
+  opacity: 0.85;
+}
+
+.dyn-table-wrapper--dark .dyn-table-th--resizable:hover .dyn-table-resize-handle::after,
+.dyn-table-wrapper--dark .dyn-table-resize-handle:hover::after {
+  background: var(--dyn-table-sort-active);
+  opacity: 1;
 }
 
 body.dyn-table-resizing {
@@ -815,10 +814,8 @@ body.dyn-table-resizing * {
   cursor: grab;
   flex-shrink: 0;
   opacity: 0.7;
-  transition:
-    background-color var(--dyn-table-transition),
-    color var(--dyn-table-transition),
-    opacity var(--dyn-table-transition);
+  transition: background-color var(--dyn-table-transition),
+    color var(--dyn-table-transition), opacity var(--dyn-table-transition);
 }
 
 .dyn-table-th__drag-handle svg {
@@ -1043,8 +1040,7 @@ body.dyn-table-resizing * {
   color: var(--dyn-table-text);
   font-size: 0.8125rem;
   cursor: pointer;
-  transition:
-    background-color var(--dyn-table-transition),
+  transition: background-color var(--dyn-table-transition),
     border-color var(--dyn-table-transition);
 }
 

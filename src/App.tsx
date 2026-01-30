@@ -9,15 +9,13 @@ const columns: ColumnDef<Record<string, unknown>>[] = [
 export function App() {
   return (
     <>
-      <div className="demo-table-container">
-        <Table<Record<string, unknown>>
-          data={[]}
-          columns={columns}
-          keyColumnId="id"
-          emptyMessage="Kayıt bulunamadı"
-          minHeight={280}
-        />
-      </div>
+      <Table<Record<string, unknown>>
+        data={[]}
+        columns={columns}
+        keyColumnId="id"
+        emptyMessage="Kayıt bulunamadı"
+        minHeight={280}
+      />
     </>
   );
 }
