@@ -669,35 +669,10 @@ body.dyn-table-resizing * {
   text-align: center;
   vertical-align: middle;
   cursor: default;
-  position: sticky;
-  left: 0;
-  z-index: 1;
-  background: var(--dyn-table-header-bg);
 }
 
 .dyn-table-th--selection {
-  z-index: 2;
   border-right: 1px solid var(--dyn-table-header-border);
-}
-
-.dyn-table-td--selection {
-  background: var(--dyn-table-row-bg);
-}
-
-.dyn-table tbody tr:nth-child(even) .dyn-table-td--selection {
-  background: var(--dyn-table-row-alt);
-}
-
-.dyn-table tbody tr:hover .dyn-table-td--selection {
-  background: var(--dyn-table-row-hover);
-}
-
-.dyn-table tbody tr.dyn-table-row--selected .dyn-table-td--selection {
-  background: var(--dyn-table-row-selected-bg);
-}
-
-.dyn-table tbody tr.dyn-table-row--selected:hover .dyn-table-td--selection {
-  background: var(--dyn-table-row-selected-hover);
 }
 
 .dyn-table-selection-header,
