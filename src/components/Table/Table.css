@@ -725,6 +725,14 @@ body.dyn-table-resizing * {
   box-shadow: -4px 0 8px -2px rgba(0, 0, 0, 0.04);
 }
 
+.dyn-table-wrapper--dark .dyn-table-th--actions {
+  box-shadow: -4px 0 8px -2px rgba(0, 0, 0, 0.35);
+}
+
+.dyn-table-wrapper--dark .dyn-table-td--actions {
+  box-shadow: -4px 0 8px -2px rgba(0, 0, 0, 0.3);
+}
+
 .dyn-table tbody tr:nth-child(odd) .dyn-table-td--actions {
   background: var(--dyn-table-row-bg);
 }
@@ -936,6 +944,7 @@ body.dyn-table-resizing * {
   padding: 10px 12px;
   transition: background-color var(--dyn-table-transition);
   vertical-align: middle;
+  overflow: hidden !important;
 }
 
 .dyn-table tbody tr:nth-child(odd) .dyn-table-td {
@@ -1104,6 +1113,7 @@ body.dyn-table-resizing * {
 /* Mobil kart görünümü */
 .dyn-table-mobile {
   width: 100%;
+  overflow: scroll !important;
 }
 
 .dyn-table-cards {

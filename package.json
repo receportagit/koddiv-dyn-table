@@ -1,6 +1,6 @@
 {
   "name": "koddiv-dyn-table",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "React tabanlı dinamik, tam fonksiyonlu tablo komponenti (AG Grid tarzı)",
   "type": "module",
   "main": "./dist/dyn-table.umd.cjs",
