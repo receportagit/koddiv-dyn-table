@@ -1,0 +1,38 @@
+.table-row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.table-row-actions__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.table-row-actions__btn--edit {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.table-row-actions__btn--edit:hover {
+  background: #bfdbfe;
+}
+
+.table-row-actions__btn--delete {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.table-row-actions__btn--delete:hover {
+  background: #fecaca;
+}

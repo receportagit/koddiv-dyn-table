@@ -1,0 +1,1205 @@
+.dyn-table-wrapper {
+  --dyn-table-font: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --dyn-table-radius: 2px;
+  --dyn-table-header-font: 600;
+  --dyn-table-transition: 0.15s ease;
+  --dyn-table-row-selected-bg: #eff6ff;
+  --dyn-table-row-selected-hover: #dbeafe;
+
+  width: 100%;
+  border-radius: var(--dyn-table-radius);
+  box-shadow: var(--dyn-table-shadow-lg);
+  background: var(--dyn-table-row-bg);
+  border: 1px solid var(--dyn-table-border);
+}
+
+/* Toolbar — seçim aksiyonları + dropdown */
+.dyn-table-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--dyn-table-border);
+  background: var(--dyn-table-row-bg);
+  font-size: 0.8125rem;
+  min-height: 44px;
+}
+
+.dyn-table-toolbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.dyn-table-toolbar__btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--dyn-table-border);
+  background: var(--dyn-table-row-bg);
+  color: var(--dyn-table-text);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color var(--dyn-table-transition),
+    border-color var(--dyn-table-transition),
+    color var(--dyn-table-transition);
+}
+
+.dyn-table-toolbar__btn:hover:not(:disabled) {
+  background: var(--dyn-table-row-hover);
+  border-color: var(--dyn-table-header-border);
+  color: var(--dyn-table-sort-active);
+}
+
+.dyn-table-toolbar__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dyn-table-toolbar__btn--filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dyn-table-toolbar__btn--filter-active {
+  border-color: var(--dyn-table-sort-active);
+  color: var(--dyn-table-sort-active);
+}
+
+.dyn-table-toolbar__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--dyn-table-sort-active);
+  color: #fff;
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.dyn-table-toolbar__dropdown {
+  position: relative;
+}
+
+.dyn-table-toolbar__dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--dyn-table-border);
+  background: var(--dyn-table-row-bg);
+  color: var(--dyn-table-text);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color var(--dyn-table-transition),
+    border-color var(--dyn-table-transition);
+}
+
+.dyn-table-toolbar__dropdown-trigger:hover:not(:disabled) {
+  background: var(--dyn-table-row-hover);
+  border-color: var(--dyn-table-header-border);
+}
+
+.dyn-table-toolbar__dropdown-trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dyn-table-toolbar__dropdown-chevron {
+  flex-shrink: 0;
+  transition: transform var(--dyn-table-transition);
+}
+
+.dyn-table-toolbar__dropdown-chevron--open {
+  transform: rotate(180deg);
+}
+
+.dyn-table-toolbar__dropdown-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 10;
+  min-width: 200px;
+  max-width: 320px;
+  max-height: 280px;
+  overflow-y: auto;
+  border-radius: 8px;
+  border: 1px solid var(--dyn-table-border);
+  background: var(--dyn-table-row-bg);
+  box-shadow: var(--dyn-table-shadow-lg);
+}
+
+.dyn-table-toolbar__dropdown-list {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+}
+
+.dyn-table-toolbar__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 0.8125rem;
+  color: var(--dyn-table-text);
+  transition: background-color var(--dyn-table-transition);
+}
+
+.dyn-table-toolbar__dropdown-item:hover {
+  background: var(--dyn-table-row-hover);
+}
+
+.dyn-table-toolbar__dropdown-item-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dyn-table-toolbar__dropdown-item-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--dyn-table-text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background-color var(--dyn-table-transition),
+    color var(--dyn-table-transition);
+}
+
+.dyn-table-toolbar__dropdown-item-remove:hover {
+  background: var(--dyn-table-border);
+  color: var(--dyn-table-text);
+}
+
+.dyn-table-toolbar__dropdown-panel--columns {
+  min-width: 200px;
+  max-height: 320px;
+}
+
+.dyn-table-column-visibility__header {
+  padding: 8px 12px 4px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--dyn-table-text-muted);
+  border-bottom: 1px solid var(--dyn-table-border);
+}
+
+.dyn-table-toolbar__dropdown-item--checkbox {
+  padding: 6px 12px;
+}
+
+.dyn-table-column-visibility__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  color: var(--dyn-table-text);
+}
+
+.dyn-table-column-visibility__label input {
+  flex-shrink: 0;
+}
+
+/* Toolbar — mobil */
+.dyn-table-toolbar--mobile {
+  padding: 8px 12px;
+  min-height: 40px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dyn-table-toolbar--mobile .dyn-table-toolbar__actions {
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
+  gap: 6px;
+}
+
+.dyn-table-toolbar--mobile .dyn-table-toolbar__btn {
+  padding: 6px 10px;
+  font-size: 0.75rem;
+}
+
+.dyn-table-toolbar--mobile
+  .dyn-table-toolbar__btn--filter
+  .dyn-table-toolbar__btn-label {
+  display: none;
+}
+
+.dyn-table-toolbar--mobile .dyn-table-toolbar__dropdown-trigger {
+  padding: 6px 8px;
+  font-size: 0.75rem;
+}
+
+.dyn-table-toolbar--mobile .dyn-table-toolbar__dropdown-trigger span {
+  max-width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dyn-table-toolbar--mobile .dyn-table-toolbar__dropdown-panel {
+  left: auto;
+  right: 0;
+  min-width: 100%;
+  max-width: min(320px, 100vw);
+  max-height: 60vh;
+}
+
+.dyn-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Sanal listeleme: dikey scroll + sticky header */
+.dyn-table-scroll--virtualized {
+  overflow-y: auto;
+}
+
+.dyn-table-scroll--virtualized .dyn-table thead th,
+.dyn-table-scroll--sticky-header .dyn-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: var(--dyn-table-header-bg);
+  box-shadow: 0 1px 0 var(--dyn-table-header-border);
+}
+
+.dyn-table-scroll--sticky-header {
+  overflow-y: auto;
+}
+
+.dyn-table-virtual-spacer td {
+  pointer-events: none;
+  background: transparent !important;
+}
+
+/* Filtre paneli — sağdan açılan (AG Grid tarzı) */
+.dyn-table-main {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.dyn-table-main__content {
+  width: 100%;
+}
+
+.dyn-table-filter-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.dyn-table-filter-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  background: var(--dyn-table-row-bg);
+  border-left: 1px solid var(--dyn-table-border);
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+  overflow: hidden;
+}
+
+.dyn-table-filter-panel--open {
+  transform: translateX(0);
+}
+
+.dyn-table-filter-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--dyn-table-border);
+  background: var(--dyn-table-row-alt);
+  flex-shrink: 0;
+}
+
+.dyn-table-filter-panel__title {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--dyn-table-header-text);
+}
+
+.dyn-table-filter-panel__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--dyn-table-text-muted);
+  cursor: pointer;
+  transition:
+    background-color var(--dyn-table-transition),
+    color var(--dyn-table-transition);
+}
+
+.dyn-table-filter-panel__close:hover {
+  background: var(--dyn-table-border);
+  color: var(--dyn-table-text);
+}
+
+.dyn-table-filter-panel__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+}
+
+.dyn-table-filter-panel__clear {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--dyn-table-border);
+  background: transparent;
+  color: var(--dyn-table-text-muted);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition:
+    background-color var(--dyn-table-transition),
+    color var(--dyn-table-transition);
+}
+
+.dyn-table-filter-panel__clear:hover {
+  background: var(--dyn-table-row-hover);
+  color: var(--dyn-table-text);
+}
+
+.dyn-table-filter-panel__item {
+  margin-bottom: 14px;
+}
+
+.dyn-table-filter-panel__item:last-child {
+  margin-bottom: 0;
+}
+
+.dyn-table-filter-panel__label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--dyn-table-text-muted);
+}
+
+.dyn-table-filter-panel__input,
+.dyn-table-filter-panel__select {
+  width: 90%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--dyn-table-border);
+  background: var(--dyn-table-row-bg);
+  color: var(--dyn-table-text);
+  font-size: 0.8125rem;
+  transition: border-color var(--dyn-table-transition);
+}
+
+.dyn-table-filter-panel__input:focus,
+.dyn-table-filter-panel__select:focus {
+  outline: none;
+  border-color: var(--dyn-table-sort-active);
+}
+
+.dyn-table-filter-panel__input::placeholder {
+  color: var(--dyn-table-text-muted);
+}
+
+/* Light theme — header satırlardan biraz daha koyu */
+.dyn-table-wrapper--light {
+  --dyn-table-header-bg: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 100%);
+  --dyn-table-header-text: #0f172a;
+  --dyn-table-header-border: #94a3b8;
+  --dyn-table-header-hover: #cbd5e1;
+  --dyn-table-header-sort: #3b82f6;
+  --dyn-table-border: #e2e8f0;
+  --dyn-table-row-bg: #ffffff;
+  --dyn-table-row-hover: #f8fafc;
+  --dyn-table-row-alt: #f1f5f9;
+  --dyn-table-row-selected-bg: #eff6ff;
+  --dyn-table-row-selected-hover: #dbeafe;
+  --dyn-table-text: #334155;
+  --dyn-table-text-muted: #64748b;
+  --dyn-table-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --dyn-table-shadow-lg:
+    0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --dyn-table-sort-active: #2563eb;
+  --dyn-table-sort-inactive: #94a3b8;
+}
+
+/* Light theme — toolbar modern, sade */
+.dyn-table-wrapper--light .dyn-table-toolbar {
+  background: #fafbfc;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 20px;
+  min-height: 48px;
+  gap: 10px;
+}
+
+.dyn-table-wrapper--light .dyn-table-toolbar__btn {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition:
+    background-color var(--dyn-table-transition),
+    border-color var(--dyn-table-transition),
+    color var(--dyn-table-transition),
+    box-shadow var(--dyn-table-transition);
+}
+
+.dyn-table-wrapper--light .dyn-table-toolbar__btn:hover:not(:disabled) {
+  background: #ffffff;
+  border-color: #d1d5db;
+  color: #2563eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.dyn-table-wrapper--light .dyn-table-toolbar__btn--filter-active {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  color: #2563eb;
+  box-shadow: 0 1px 2px rgba(59, 130, 246, 0.2);
+}
+
+.dyn-table-wrapper--light .dyn-table-toolbar__filter-count {
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  min-width: 20px;
+  height: 20px;
+  font-size: 0.6875rem;
+}
+
+.dyn-table-wrapper--light .dyn-table-toolbar__dropdown-trigger {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition:
+    background-color var(--dyn-table-transition),
+    border-color var(--dyn-table-transition),
+    color var(--dyn-table-transition),
+    box-shadow var(--dyn-table-transition);
+}
+
+.dyn-table-wrapper--light
+  .dyn-table-toolbar__dropdown-trigger:hover:not(:disabled) {
+  background: #ffffff;
+  border-color: #d1d5db;
+  color: #111827;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.dyn-table-wrapper--light .dyn-table-toolbar__dropdown-trigger--open,
+.dyn-table-wrapper--light
+  .dyn-table-toolbar__dropdown-trigger[aria-expanded="true"] {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.dyn-table-wrapper--light .dyn-table-toolbar__dropdown-panel {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.07),
+    0 10px 20px -5px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+}
+
+.dyn-table-wrapper--light .dyn-table-toolbar__dropdown-item:hover {
+  background: #f3f4f6;
+}
+
+.dyn-table-wrapper--light .dyn-table-column-visibility__header {
+  color: #64748b;
+  border-bottom-color: #e2e8f0;
+}
+
+/* Dark theme — header satırlardan hafif koyu */
+.dyn-table-wrapper--dark {
+  --dyn-table-header-bg: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+  --dyn-table-header-text: #f1f5f9;
+  --dyn-table-header-border: rgba(255, 255, 255, 0.06);
+  --dyn-table-header-hover: rgba(255, 255, 255, 0.08);
+  --dyn-table-header-sort: #93c5fd;
+  --dyn-table-border: #334155;
+  --dyn-table-row-bg: #1e293b;
+  --dyn-table-row-hover: #334155;
+  --dyn-table-row-alt: #0f172a;
+  --dyn-table-row-selected-bg: rgba(59, 130, 246, 0.2);
+  --dyn-table-row-selected-hover: rgba(59, 130, 246, 0.28);
+  --dyn-table-text: #e2e8f0;
+  --dyn-table-text-muted: #94a3b8;
+  --dyn-table-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --dyn-table-shadow-lg:
+    0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+  --dyn-table-sort-active: #93c5fd;
+  --dyn-table-sort-inactive: #64748b;
+}
+
+.dyn-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--dyn-table-font);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--dyn-table-text);
+}
+
+.dyn-table--fixed {
+  table-layout: fixed;
+}
+
+.dyn-table thead {
+  position: relative;
+}
+
+.dyn-table thead tr {
+  background: var(--dyn-table-header-bg);
+  border-bottom: 1px solid var(--dyn-table-header-border);
+}
+
+.dyn-table-th {
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: var(--dyn-table-header-font);
+  color: var(--dyn-table-header-text);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  position: relative;
+  transition:
+    background-color var(--dyn-table-transition),
+    color var(--dyn-table-transition);
+}
+
+.dyn-table-th--resizable {
+  padding-right: 22px;
+}
+
+.dyn-table-resize-handle {
+  position: absolute;
+  top: 6px;
+  right: 0;
+  width: 9px;
+  height: 75%;
+  cursor: col-resize;
+  user-select: none;
+  z-index: 1;
+}
+
+.dyn-table-resize-handle::after {
+  content: "";
+  position: absolute;
+  top: 25%;
+  right: 4px;
+  width: 2px;
+  height: 50%;
+  background: var(--dyn-table-header-border);
+  border-radius: 1px;
+  opacity: 0.5;
+  transition:
+    opacity var(--dyn-table-transition),
+    background-color var(--dyn-table-transition);
+}
+
+.dyn-table-th--resizable:hover .dyn-table-resize-handle::after,
+.dyn-table-resize-handle:hover::after {
+  opacity: 0.9;
+  background: var(--dyn-table-sort-active);
+}
+
+body.dyn-table-resizing {
+  cursor: col-resize;
+  user-select: none;
+}
+
+body.dyn-table-resizing * {
+  cursor: col-resize !important;
+}
+
+.dyn-table-th--selection,
+.dyn-table-td--selection {
+  width: 44px;
+  min-width: 44px;
+  max-width: 44px;
+  padding: 8px 16px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: default;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--dyn-table-header-bg);
+}
+
+.dyn-table-th--selection {
+  z-index: 2;
+  border-right: 1px solid var(--dyn-table-header-border);
+}
+
+.dyn-table-td--selection {
+  background: var(--dyn-table-row-bg);
+}
+
+.dyn-table tbody tr:nth-child(even) .dyn-table-td--selection {
+  background: var(--dyn-table-row-alt);
+}
+
+.dyn-table tbody tr:hover .dyn-table-td--selection {
+  background: var(--dyn-table-row-hover);
+}
+
+.dyn-table tbody tr.dyn-table-row--selected .dyn-table-td--selection {
+  background: var(--dyn-table-row-selected-bg);
+}
+
+.dyn-table tbody tr.dyn-table-row--selected:hover .dyn-table-td--selection {
+  background: var(--dyn-table-row-selected-hover);
+}
+
+.dyn-table-selection-header,
+.dyn-table-selection-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0;
+}
+
+.dyn-table-selection-header input,
+.dyn-table-selection-cell input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--dyn-table-sort-active);
+}
+
+.dyn-table-th:first-child:not(.dyn-table-th--selection),
+.dyn-table-td:first-child:not(.dyn-table-td--selection) {
+  padding-left: 16px;
+}
+
+.dyn-table-th--selection + .dyn-table-th,
+.dyn-table-td--selection + .dyn-table-td {
+  padding-left: 16px;
+}
+
+.dyn-table-th:first-child:not(.dyn-table-th--selection) {
+  border-radius: var(--dyn-table-radius) 0 0 0;
+}
+
+.dyn-table-th:last-child {
+  padding-right: 16px;
+}
+
+.dyn-table-th--actions {
+  cursor: default;
+  background: var(--dyn-table-header-bg);
+  position: sticky;
+  right: 0;
+  z-index: 2;
+  box-shadow: -4px 0 8px -2px rgba(0, 0, 0, 0.06);
+}
+
+.dyn-table-td--actions {
+  position: sticky;
+  right: 0;
+  z-index: 1;
+  box-shadow: -4px 0 8px -2px rgba(0, 0, 0, 0.04);
+}
+
+.dyn-table tbody tr:nth-child(odd) .dyn-table-td--actions {
+  background: var(--dyn-table-row-bg);
+}
+
+.dyn-table tbody tr:nth-child(even) .dyn-table-td--actions {
+  background: var(--dyn-table-row-alt);
+}
+
+.dyn-table tbody tr:hover .dyn-table-td--actions {
+  background: var(--dyn-table-row-hover);
+}
+
+/* Sabit kolonlar (pinned) — yatay scroll'da sol/sağ sabit */
+.dyn-table-th--pinned-left,
+.dyn-table-td--pinned-left {
+  position: sticky;
+  z-index: 1;
+  background: var(--dyn-table-header-bg);
+  box-shadow: 4px 0 8px -2px rgba(0, 0, 0, 0.06);
+}
+
+.dyn-table-td--pinned-left {
+  background: var(--dyn-table-row-bg);
+}
+
+.dyn-table tbody tr:nth-child(even) .dyn-table-td--pinned-left {
+  background: var(--dyn-table-row-alt);
+}
+
+.dyn-table tbody tr:hover .dyn-table-td--pinned-left {
+  background: var(--dyn-table-row-hover);
+}
+
+.dyn-table-th--pinned-left {
+  z-index: 2;
+}
+
+.dyn-table-th--pinned-right,
+.dyn-table-td--pinned-right {
+  position: sticky;
+  z-index: 1;
+  background: var(--dyn-table-header-bg);
+  box-shadow: -4px 0 8px -2px rgba(0, 0, 0, 0.06);
+}
+
+.dyn-table-td--pinned-right {
+  background: var(--dyn-table-row-bg);
+}
+
+.dyn-table tbody tr:nth-child(even) .dyn-table-td--pinned-right {
+  background: var(--dyn-table-row-alt);
+}
+
+.dyn-table tbody tr:hover .dyn-table-td--pinned-right {
+  background: var(--dyn-table-row-hover);
+}
+
+.dyn-table-th--pinned-right {
+  z-index: 2;
+}
+
+.dyn-table-th--sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.dyn-table-th--sortable:hover {
+  background: var(--dyn-table-header-hover);
+  color: var(--dyn-table-header-sort);
+}
+
+.dyn-table-th__content {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dyn-table-th__drag-handle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 4px;
+  color: var(--dyn-table-text-muted);
+  cursor: grab;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition:
+    background-color var(--dyn-table-transition),
+    color var(--dyn-table-transition),
+    opacity var(--dyn-table-transition);
+}
+
+.dyn-table-th__drag-handle svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+.dyn-table-th__drag-handle:hover {
+  color: var(--dyn-table-header-text);
+  background: var(--dyn-table-row-hover);
+  opacity: 1;
+}
+
+.dyn-table-th__drag-handle:active {
+  cursor: grabbing;
+  background: var(--dyn-table-border);
+}
+
+.dyn-table-th--dragging {
+  opacity: 0.6;
+}
+
+.dyn-table-th--drag-over {
+  box-shadow: inset 0 0 0 2px var(--dyn-table-sort-active);
+}
+
+/* Yükleme — skeleton */
+.dyn-table-skeleton {
+  display: inline-block;
+  min-width: 40px;
+  min-height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--dyn-table-border) 0%,
+    var(--dyn-table-row-hover) 50%,
+    var(--dyn-table-border) 100%
+  );
+  background-size: 200% 100%;
+  animation: dyn-table-skeleton-shimmer 1.2s ease-in-out infinite;
+}
+
+.dyn-table-skeleton--checkbox {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  border-radius: 3px;
+}
+
+.dyn-table-row--skeleton .dyn-table-td {
+  vertical-align: middle;
+}
+
+.dyn-table-row--skeleton .dyn-table-skeleton {
+  width: 60%;
+  max-width: 120px;
+}
+
+.dyn-table-card--skeleton .dyn-table-card__value .dyn-table-skeleton {
+  width: 70%;
+  max-width: 100px;
+}
+
+@keyframes dyn-table-skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.dyn-table-sort {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-left: 2px;
+  flex-shrink: 0;
+  opacity: 0.6;
+  transition: opacity var(--dyn-table-transition);
+}
+
+.dyn-table-th--sortable:hover .dyn-table-sort,
+.dyn-table-th--sortable.dyn-table-th--sorted .dyn-table-sort {
+  opacity: 1;
+}
+
+.dyn-table-th--sortable.dyn-table-th--sorted .dyn-table-sort {
+  color: var(--dyn-table-header-sort);
+}
+
+.dyn-table-sort svg {
+  width: 14px;
+  height: 14px;
+}
+
+.dyn-table tbody tr {
+  transition: background-color var(--dyn-table-transition);
+  border-bottom: 1px solid var(--dyn-table-border);
+}
+
+.dyn-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.dyn-table tbody tr:hover {
+  background: var(--dyn-table-row-hover);
+}
+
+.dyn-table-td {
+  padding: 10px 12px;
+  transition: background-color var(--dyn-table-transition);
+  vertical-align: middle;
+}
+
+.dyn-table tbody tr:nth-child(odd) .dyn-table-td {
+  background: var(--dyn-table-row-bg);
+}
+
+.dyn-table tbody tr:nth-child(even) .dyn-table-td {
+  background: var(--dyn-table-row-alt);
+}
+
+.dyn-table tbody tr:hover .dyn-table-td {
+  background: var(--dyn-table-row-hover);
+}
+
+.dyn-table tbody tr.dyn-table-row--selected .dyn-table-td {
+  background: var(--dyn-table-row-selected-bg);
+}
+
+.dyn-table tbody tr.dyn-table-row--selected:hover .dyn-table-td {
+  background: var(--dyn-table-row-selected-hover);
+}
+
+.dyn-table-td:first-child {
+  padding-left: 16px;
+}
+
+.dyn-table-td:last-child {
+  padding-right: 16px;
+}
+
+.dyn-table-empty {
+  text-align: center;
+  color: var(--dyn-table-text-muted);
+  padding: 48px 24px;
+  font-size: 0.9375rem;
+  background: var(--dyn-table-row-bg);
+}
+
+.dyn-table-empty td {
+  border: none;
+  background: var(--dyn-table-row-bg) !important;
+}
+
+/* Scrollbar (webkit) — sadece tablo satırları için, tablonun hemen altında */
+.dyn-table-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.dyn-table-scroll::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.dyn-table-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.dyn-table-scroll::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Pagination */
+.dyn-table-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--dyn-table-border);
+  background: var(--dyn-table-row-bg);
+  font-size: 0.8125rem;
+  color: var(--dyn-table-text);
+}
+
+.dyn-table-pagination__info {
+  color: var(--dyn-table-text-muted);
+}
+
+.dyn-table-pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dyn-table-pagination__pagesize {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--dyn-table-border);
+  background: var(--dyn-table-row-bg);
+  color: var(--dyn-table-text);
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.dyn-table-pagination__btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--dyn-table-border);
+  background: var(--dyn-table-row-bg);
+  color: var(--dyn-table-text);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition:
+    background-color var(--dyn-table-transition),
+    border-color var(--dyn-table-transition);
+}
+
+.dyn-table-pagination__btn:hover:not(:disabled) {
+  background: var(--dyn-table-row-hover);
+  border-color: #cbd5e1;
+}
+
+.dyn-table-pagination__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dyn-table-pagination__page {
+  color: var(--dyn-table-text-muted);
+  min-width: 80px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .dyn-table-pagination {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 10px 8px;
+  }
+
+  .dyn-table-pagination__info {
+    text-align: center;
+    font-size: 0.75rem;
+  }
+
+  .dyn-table-pagination__controls {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .dyn-table-pagination__pagesize {
+    min-height: 32px;
+    padding: 5px 8px;
+    font-size: 0.75rem;
+    max-width: 72px;
+  }
+
+  .dyn-table-pagination__btn {
+    min-height: 32px;
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+
+  .dyn-table-pagination__page {
+    width: 100%;
+    min-width: 0;
+    order: -1;
+    margin-bottom: 2px;
+    font-size: 0.75rem;
+  }
+}
+
+/* Mobil kart görünümü */
+.dyn-table-mobile {
+  width: 100%;
+}
+
+.dyn-table-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px;
+}
+
+.dyn-table-card {
+  background: var(--dyn-table-row-bg);
+  border: 1px solid var(--dyn-table-border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: var(--dyn-table-shadow);
+}
+
+.dyn-table-card__selection {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--dyn-table-border);
+}
+
+.dyn-table-card__selection .dyn-table-selection-cell input {
+  width: 18px;
+  height: 18px;
+}
+
+.dyn-table-card__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--dyn-table-border);
+  font-size: 0.875rem;
+}
+
+.dyn-table-card__row:last-of-type {
+  border-bottom: none;
+}
+
+.dyn-table-card__label {
+  font-weight: 600;
+  color: var(--dyn-table-header-text);
+  flex-shrink: 0;
+  min-width: 100px;
+}
+
+.dyn-table-card__value {
+  color: var(--dyn-table-text);
+  text-align: right;
+  word-break: break-word;
+}
+
+.dyn-table-card__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--dyn-table-border);
+}
+
+.dyn-table-empty--card {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--dyn-table-text-muted);
+  font-size: 0.9375rem;
+}

@@ -1,0 +1,17 @@
+.table-formatter-status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.table-formatter-status--active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.table-formatter-status--inactive {
+  background: #f1f5f9;
+  color: #64748b;
+}
